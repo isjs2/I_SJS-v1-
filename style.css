@@ -1,12 +1,30 @@
-/* Переменные для легкого управления зелеными цветами мессенджера */
 :root {
-    --main-green: #2e7d32;     /* Основной темно-зеленый (кнопки, шапка) */
-    --light-green: #e8f5e9;    /* Светло-зеленый фон боковой панели */
-    --dark-green: #1b5e20;     /* Насыщенный зеленый для акцентов */
-    --accent-green: #4caf50;   /* Цвет активного выбранного пользователя */
-    --bubble-sent: #dcf8c6;    /* Цвет облачка отправленного сообщения */
-    --bg-gray: #f4f6f4;        /* Общий фон страницы */
+    --main-green: #2e7d32;
+    --light-green: #e8f5e9;
+    --dark-green: #1b5e20;
+    --accent-green: #4caf50;
+    --bubble-sent: #dcf8c6;
+    --bg-gray: #f4f6f4;
     --white: #ffffff;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --chat-bg: #fafafa;
+    --dot-color: #d0ebd0;
+}
+
+/* Переменные для ТЕМНОЙ ТЕМЫ */
+body.dark-theme {
+    --main-green: #1b5e20;
+    --light-green: #121212;
+    --dark-green: #0d3c0e;
+    --accent-green: #2e7d32;
+    --bubble-sent: #1e4620;
+    --bg-gray: #1a1a1a;
+    --white: #242424;
+    --text-color: #e0e0e0;
+    --border-color: #333333;
+    --chat-bg: #1e1e1e;
+    --dot-color: #2d3c2d;
 }
 
 * {
@@ -18,125 +36,136 @@
 
 body {
     background-color: var(--bg-gray);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* ==========================================================================
-   ОКНА АВТОРИЗАЦИИ (ВХОД И РЕГИСТРАЦИЯ)
-   ========================================================================== */
 .auth-container {
     background: var(--white);
     padding: 35px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     width: 100%;
     max-width: 400px;
     text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
+    transition: background 0.3s;
 }
 
 .auth-container h2 {
-    color: var(--main-green);
+    color: var(--accent-green);
     margin-bottom: 25px;
-    font-size: 24px;
 }
 
 .input-group input {
     width: 100%;
     padding: 12px 15px;
     margin: 10px 0;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--border-color);
+    background: var(--bg-gray);
+    color: var(--text-color);
     border-radius: 6px;
     outline: none;
-    font-size: 16px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.3s, color 0.3s;
 }
 
 .input-group input:focus {
-    border-color: var(--main-green);
+    border-color: var(--accent-green);
 }
 
 .auth-container button {
     width: 100%;
     padding: 12px;
     background-color: var(--main-green);
-    color: var(--white);
+    color: white;
     border: none;
     border-radius: 6px;
-    font-size: 16px;
     cursor: pointer;
-    margin-top: 15px;
     font-weight: bold;
     transition: background 0.2s;
 }
 
-.auth-container button:hover {
-    background-color: var(--dark-green);
-}
-
-.auth-container .toggle-link {
+.toggle-link {
     margin-top: 20px;
     color: var(--accent-green);
     cursor: pointer;
     display: inline-block;
-    font-size: 14px;
     text-decoration: underline;
 }
 
-.auth-container .toggle-link:hover {
-    color: var(--dark-green);
-}
-
-/* ==========================================================================
-   ГЛАВНЫЙ ИНТЕРФЕЙС ПРИЛОЖЕНИЯ
-   ========================================================================== */
+/* Главный контейнер приложения */
 .app-container {
     width: 100%;
     max-width: 1100px;
     height: 90vh;
     background: var(--white);
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     overflow: hidden;
     display: flex;
+    border: 1px solid var(--border-color);
+    transition: background 0.3s, border-color 0.3s;
 }
 
-/* Боковая панель пользователей */
 .sidebar {
     width: 30%;
     min-width: 280px;
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     background: var(--light-green);
+    transition: background 0.3s, border-color 0.3s;
 }
 
 .sidebar-header {
     padding: 20px;
     background: var(--main-green);
-    color: var(--white);
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: bold;
+    transition: background 0.3s;
 }
 
-.logout-btn {
+.header-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.theme-btn, .logout-btn {
     background: transparent;
-    border: 1px solid var(--white);
-    color: var(--white);
-    padding: 6px 12px;
+    border: 1px solid white;
+    color: white;
+    padding: 6px 10px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 13px;
-    transition: background 0.2s;
 }
 
-.logout-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+/* Вкладки "Все" / "Друзья" */
+.tabs-container {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--white);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn.active {
+    border-bottom: 3px solid var(--accent-green);
+    color: var(--accent-green);
 }
 
 .user-list {
@@ -146,7 +175,7 @@ body {
 
 .user-item {
     padding: 15px 20px;
-    border-bottom: 1px solid #e2ebe2;
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -154,12 +183,17 @@ body {
 }
 
 .user-item:hover {
-    background: #dbeedb;
+    background: rgba(128, 128, 128, 0.1);
 }
 
 .user-item.active {
     background: var(--accent-green);
-    color: var(--white);
+    color: white;
+}
+
+/* Исправление: цвет текста внутри активного элемента */
+.user-item.active .user-name {
+    color: white;
 }
 
 .user-item .avatar {
@@ -167,45 +201,55 @@ body {
     height: 40px;
     border-radius: 50%;
     background: var(--main-green);
-    color: var(--white);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 15px;
     font-weight: bold;
-    font-size: 16px;
+    flex-shrink: 0;
+    transition: background 0.3s;
 }
 
-.user-item.active .avatar {
-    background: var(--dark-green);
-}
-.user-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.user-name {
-    font-weight: 500;
-}
-
-/* Окно активного чата */
+/* Область чата */
 .chat-area {
     width: 70%;
     display: flex;
     flex-direction: column;
-    background: #fafafa;
+    background: var(--chat-bg);
+    transition: background 0.3s;
 }
 
 .chat-header {
     padding: 20px;
     background: var(--white);
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--border-color);
     font-size: 18px;
     font-weight: bold;
-    color: var(--dark-green);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s, border-color 0.3s;
 }
 
-/* Сетка мессенджера (точечный фон) */
+/* Кнопки друзей */
+.friend-action-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.friend-action-btn.add-btn {
+    background: var(--accent-green);
+    color: white;
+}
+.friend-action-btn.remove-btn {
+    background: #d32f2f;
+    color: white;
+}
+
 .messages-container {
     flex-grow: 1;
     padding: 25px;
@@ -213,11 +257,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background-image: radial-gradient(#d0ebd0 1.5px, transparent 0);
+    background-image: radial-gradient(var(--dot-color) 1.5px, transparent 0);
     background-size: 24px 24px;
+    transition: background 0.3s;
 }
 
-/* Стили облачков сообщений */
 .message {
     max-width: 65%;
     padding: 12px 16px;
@@ -225,63 +269,55 @@ body {
     font-size: 15px;
     line-height: 1.4;
     word-wrap: break-word;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    transition: background 0.3s, color 0.3s;
 }
 
 .message.sent {
     background: var(--bubble-sent);
+    color: var(--text-color);
     align-self: flex-end;
     border-top-right-radius: 0;
 }
 
-.message.received {
-    background: var(--white);
-    align-self: flex-start;
-    border-top-left-radius: 0;
-    border: 1px solid #e0e0e0;
+body.dark-theme .message.sent {
+    color: #ffffff;
 }
 
-/* Область ввода */
+.message.received {
+    background: var(--white);
+    color: var(--text-color);
+    align-self: flex-start;
+    border-top-left-radius: 0;
+    border: 1px solid var(--border-color);
+}
+
 .chat-input-area {
     padding: 20px;
     background: var(--white);
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-color);
     display: flex;
     gap: 12px;
+    transition: background 0.3s, border-color 0.3s;
 }
 
 .chat-input-area input {
     flex-grow: 1;
     padding: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
+    background: var(--bg-gray);
+    color: var(--text-color);
     border-radius: 8px;
     outline: none;
-    font-size: 15px;
-    transition: border-color 0.2s;
-}
-
-.chat-input-area input:focus {
-    border-color: var(--main-green);
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .chat-input-area button {
     padding: 0 25px;
     background: var(--main-green);
-    color: var(--white);
+    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 15px;
     transition: background 0.2s;
-}
-
-.chat-input-area button:hover {
-    background-color: var(--dark-green);
-}
-
-/* Простая анимация появления */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
